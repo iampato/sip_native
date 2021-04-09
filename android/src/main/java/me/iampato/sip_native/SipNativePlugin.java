@@ -5,6 +5,8 @@ import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.TrafficStats;
+import android.net.sip.SipAudioCall;
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
@@ -38,6 +40,7 @@ import io.flutter.plugin.common.MethodChannel.Result;
 enum SipRegistrationState {UNKNOWN, ONREGISTERING, ONREGISTRATIONDONE, ONREGISTRATIONFAILED}
 
 public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, StreamHandler, ActivityAware {
+    final private String TAG = "SIP Native";
     /// To use the SIP API, your application must create a SipManager object.
     /// The SipManager takes care of the following in your application:
     ///  1. Initiating SIP sessions.
@@ -56,11 +59,11 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
     /// This local reference serves to register the plugin with the Flutter Engine and unregister it
     /// when the Flutter Engine is detached from the Activity
     private MethodChannel methodChannel;
-    private EventChannel eventChannel;
     private FlutterPluginBinding pluginBinding = null;
     private ActivityPluginBinding activityPluginBinding;
     private SipRegistrationListener listener;
-    private Handler uiThreadHandler = new Handler(Looper.getMainLooper());
+    public SipAudioCall call = null;
+    private final Handler uiThreadHandler = new Handler(Looper.getMainLooper());
 
 
     @Override
@@ -69,20 +72,20 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
         // initialize sip manager
 
         if (this.sipManager == null) {
-            Log.d("SIP NATIVE", "onAttachedToEngine: Sip manager init was called");
+            Log.d(TAG, "onAttachedToEngine: Sip manager init was called");
             try {
                 this.sipManager = SipManager.newInstance(pluginBinding.getApplicationContext());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            Log.d("SIP NATIVE", "onAttachedToEngine: Sip manager is crazy");
+            Log.d(TAG, "onAttachedToEngine: Sip manager is crazy");
         }
         // setup method channels
         methodChannel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/method");
         methodChannel.setMethodCallHandler(this);
         // setup event channels
-        eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/event");
+        EventChannel eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/event");
         eventChannel.setStreamHandler(this);
     }
 
@@ -142,16 +145,17 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                 break;
             case "discSip":
                 try {
-                    closeLocalProfile();
+                   boolean res = closeLocalProfile();
+                   result.success(res);
                 } catch (Exception e) {
                     e.printStackTrace();
                     result.error(null, e.toString(), null);
                 }
                 break;
             case "initSip":
-                String username = "254717008247";//call.argument("username");
-                String password = "475bbd248835981240e0fab16cdeb5af"; //call.argument("password");
-                String domain = "138.68.167.56";//call.argument("domain");
+                String username = call.argument("username");
+                String password = call.argument("password");
+                String domain = call.argument("domain");
 
                 //
                 try {
@@ -166,61 +170,84 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                     intent.setAction("android.SIPNative.INCOMING_CALL");
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(this.pluginBinding.getApplicationContext(), 0, intent, Intent.FILL_IN_DATA);
                     sipManager.open(sipProfile);
-                    TimeUnit.SECONDS.sleep(10);
-//                    sipManager.setRegistrationListener(sipProfile.getUriString(),new SipRegistrationListener() {
-//                        @Override
-//                        public void onRegistering(String localProfileUri) {
-//                            Log.d("SIP plugin", "sip registering");
-//                        }
-//
-//                        @Override
-//                        public void onRegistrationDone(String localProfileUri, long expiryTime) {
-//                            Log.d("SIP plugin", "sip onRegistrationDone");
-//                        }
-//
-//                        @Override
-//                        public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
-//                            Log.d("SIP plugin", "sip onRegistrationFailed\n"+"uri: "+localProfileUri+"\nError code:"+String.valueOf(errorCode)+"\nError message:"+errorMessage);
-//                        }
-//                    });
 //                    sipManager.open(sipProfile, pendingIntent, new SipRegistrationListener() {
 //                        @Override
 //                        public void onRegistering(String localProfileUri) {
-//                            Log.d("SIP plugin", "sip registering");
+//                            Log.d(TAG, "sip registering");
 //                        }
 //
 //                        @Override
 //                        public void onRegistrationDone(String localProfileUri, long expiryTime) {
-//                            Log.d("SIP plugin", "sip onRegistrationDone");
+//                            Log.d(TAG, "sip onRegistrationDone");
 //                        }
 //
 //                        @Override
 //                        public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
-//                            Log.d("SIP plugin", "sip onRegistrationFailed\n"+"uri: "+localProfileUri+"\nError code:"+String.valueOf(errorCode)+"\nError message:"+errorMessage);
+//                            Log.d(TAG, "sip onRegistrationFailed\n"+"uri: "+localProfileUri+"\nError code:"+String.valueOf(errorCode)+"\nError message:"+errorMessage);
 //                        }
 //                    });
-//                    sipManager.register(sipProfile, 3600, new SipRegistrationListener() {
-//                        @Override
-//                        public void onRegistering(String localProfileUri) {
-//                            Log.d("SIP plugin", "sip registering");
-//                        }
-//
-//                        @Override
-//                        public void onRegistrationDone(String localProfileUri, long expiryTime) {
-//                            Log.d("SIP plugin", "sip onRegistrationDone");
-//                        }
-//
-//                        @Override
-//                        public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
-//                            Log.d("SIP plugin", "sip onRegistrationFailed");
-//                        }
-//                    });
+
                     result.success(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                     result.success(false);
                 }
                 //
+                break;
+            case "initCall":
+                try {
+                    SipAudioCall.Listener listener = new SipAudioCall.Listener() {
+                        @Override
+                        public void onCalling(SipAudioCall call) {
+                            Log.d(TAG,"call onCalling");
+                        }
+
+                        @Override
+                        public void onRinging(SipAudioCall call, SipProfile caller) {
+                            Log.d(TAG,"call onRinging");
+                        }
+
+                        @Override
+                        public void onRingingBack(SipAudioCall call) {
+                            Log.d(TAG,"call onRingingBack");
+                        }
+
+                        @Override
+                        public void onReadyToCall(SipAudioCall call) {
+                            Log.d(TAG,"call onReadyToCall");
+                        }
+                        // Much of the client's interaction with the SIP Stack will
+                        // happen via listeners.  Even making an outgoing call, don't
+                        // forget to set up a listener to set things up once the call is established.
+                        @Override
+                        public void onCallEstablished(SipAudioCall call) {
+                            Log.d(TAG,"call onCallEstablished");
+                            call.startAudio();
+                            call.setSpeakerMode(true);
+                            call.toggleMute();
+                        }
+
+                        @Override
+                        public void onCallEnded(SipAudioCall call) {
+                            Log.d(TAG,"call onCallEnded");
+                        }
+                        @Override
+                        public void onCallBusy(SipAudioCall call) {
+                            Log.d(TAG,"call onCallBusy");
+
+                        }
+                        @Override
+                        public void onError(SipAudioCall call, int errorCode,
+                                            String errorMessage) {
+                            Log.d(TAG,"call onError"+ "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage);
+                        }
+                    };
+                    sipManager.makeAudioCall(sipProfile.getUriString(),"254717008247@138.68.167.56",listener,30);
+                }
+                catch (Exception e) {
+                    e.printStackTrace();
+                    result.error(null,e.toString(),null);
+                }
                 break;
             default:
                 result.notImplemented();
@@ -233,11 +260,11 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
 
         if (this.sipManager != null && this.sipProfile != null) {
             try {
-                events.success(registrationState.toString());
+//                events.success(registrationState.toString());
                 sipManager.register(sipProfile, 3600, new SipRegistrationListener() {
                     @Override
                     public void onRegistering(String localProfileUri) {
-                        Log.d("SIP plugin", "sip registering");
+                        Log.d(TAG, "sip registering");
                         registrationState = SipRegistrationState.ONREGISTERING;
                         uiThreadHandler.post(
                                 () -> {
@@ -248,7 +275,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
 
                     @Override
                     public void onRegistrationDone(String localProfileUri, long expiryTime) {
-                        Log.d("SIP plugin", "sip onRegistrationDone");
+                        Log.d(TAG, "sip onRegistrationDone");
                         registrationState = SipRegistrationState.ONREGISTRATIONDONE;
                         uiThreadHandler.post(
                                 () -> {
@@ -259,7 +286,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
 
                     @Override
                     public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
-                        Log.d("SIP plugin", "sip onRegistrationFailed\n" + "uri: " + localProfileUri + "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage);
+                        Log.d(TAG, "sip onRegistrationFailed\n" + "uri: " + localProfileUri + "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage);
                         registrationState = SipRegistrationState.ONREGISTRATIONFAILED;
                         uiThreadHandler.post(
                                 () -> {
@@ -271,11 +298,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
 
             } catch (Exception e) {
                 e.printStackTrace();
-                Log.d("SIP", sipProfile.getProtocol());
-                Log.d("SIP", sipProfile.getUserName());
-                Log.d("SIP", sipProfile.getSipDomain());
-                Log.d("SIP", sipProfile.getUriString());
-                Log.d("SIP", String.valueOf(sipProfile.getPort()));
+                events.error(null, e.toString(), null);
             }
 
         } else {
@@ -301,16 +324,22 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
         methodChannel.setMethodCallHandler(null);
     }
 
-    public void closeLocalProfile() {
-        if (sipManager == null) {
-            return;
-        }
-        try {
-            if (sipProfile != null) {
-                sipManager.close(sipProfile.getUriString());
+    public boolean closeLocalProfile() {
+        if (sipManager == null || call == null) {
+            return true;
+        }else {
+            try {
+                if (sipProfile != null) {
+                    sipManager.close(sipProfile.getUriString());
+                }
+                if (call != null) {
+                    call.close();
+                }
+                return true;
+            } catch (Exception e) {
+                e.printStackTrace();
+                return false;
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -328,14 +357,14 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
             Log.d("API:", "NotSupported!");
         }
         if (this.sipManager == null) {
-            Log.d("SIP NATIVE", "onAttachedToActivity: Sip manager init was called");
+            Log.d(TAG, "onAttachedToActivity: Sip manager init was called");
             try {
                 this.sipManager = SipManager.newInstance(binding.getActivity().getApplicationContext());
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else {
-            Log.d("SIP NATIVE", "onAttachedToActivity: Sip manager is crazy");
+            Log.d(TAG, "onAttachedToActivity: Sip manager is crazy");
         }
     }
 
