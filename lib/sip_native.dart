@@ -20,7 +20,7 @@ class SipNative {
   static const MethodChannel _methodChannel =
       const MethodChannel('sip_native/method');
   static const EventChannel _eventChannel =
-      const EventChannel('sip_native/event');
+      const EventChannel('sip_native/register_events');
 
   static Stream<String> registrationStateStream() {
     _streamSubscription?.cancel();
