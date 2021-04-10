@@ -21,7 +21,25 @@ Currently our team is working on solution that requires and uses sip but availab
 
 more on this link: https://obem.be/2014/06/04/sip-on-android.html
 
+
 ## Getting Started
+1. #### SipNative plugin supported
+   Check if the plugin is supported by the device
+```
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  SipNative.initPlugin().then((SipNativeSupport value) {
+    Fluttertoast.showToast(
+      msg: "Voip supported: ${value.isVoipSupported}\n" +
+          "SipManager supported: ${value.isSipManagerSupported}",
+      backgroundColor: value.isVoipSupported ? Colors.green : Colors.red,
+      toastLength: Toast.LENGTH_LONG,
+    );
+  });
+  runApp(MyApp());
+}
+   
+```
 
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/developing-packages/),
