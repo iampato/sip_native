@@ -41,6 +41,15 @@ void main() {
    
 ```
 
+2. #### Sip connect
+3. #### Sip connection status listener
+4. #### Sip init call
+5. #### Sip hold call
+6. #### Sip mute call
+7. #### Sip speaker mode
+8. #### Sip end call
+9. #### Sip disconnect
+
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/developing-packages/),
 a specialized package that includes platform-specific implementation code for
