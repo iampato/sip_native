@@ -71,7 +71,7 @@ public class MySipCallListener extends SipAudioCall.Listener {
                 }
         );
         call.startAudio();
-        call.setSpeakerMode(true);
+        call.setSpeakerMode(false);
         call.toggleMute();
     }
 

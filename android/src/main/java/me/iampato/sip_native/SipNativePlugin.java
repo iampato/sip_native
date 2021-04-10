@@ -114,9 +114,9 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                     String username = call.argument("username");
                     String password = call.argument("password");
                     String domain = call.argument("domain");
-                    UserProfile userProfile = new UserProfile(
-                            username, password, domain, 5060, "UDP"
-                    );
+                    int port = call.argument("port");
+                    String protocol = call.argument("protocol");
+                    UserProfile userProfile = new UserProfile(username, password, domain, port, protocol);
                     sipDataManager.setUserProfile(userProfile);
                     sipDataManager.initializeProfile();
                     result.success(true);
@@ -136,41 +136,42 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                 break;
             case "initCall":
                 try {
-                    sipDataManager.makeCall(result, "254717008247@138.68.167.56");
+                    String profileUri = call.argument("uri");
+                    sipDataManager.makeCall(result, profileUri);
                 } catch (Exception e) {
                     e.printStackTrace();
                     result.error(null, e.toString(), null);
                 }
                 break;
             case "endCall":
-                try{
+                try {
                     sipDataManager.endCall(result);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     result.error(null, e.toString(), null);
                 }
                 break;
             case "holdCall":
-                try{
+                try {
                     sipDataManager.holdCall(result);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     result.error(null, e.toString(), null);
                 }
                 break;
             case "muteCall":
-                try{
+                try {
                     sipDataManager.muteCall(result);
-                }catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     result.error(null, e.toString(), null);
                 }
                 break;
             case "speakerMode":
-                try{
+                try {
                     boolean mode = call.argument("mode");
-                    sipDataManager.callSpeakerMode(result,mode);
-                }catch (Exception e) {
+                    sipDataManager.callSpeakerMode(result, mode);
+                } catch (Exception e) {
                     e.printStackTrace();
                     result.error(null, e.toString(), null);
                 }
