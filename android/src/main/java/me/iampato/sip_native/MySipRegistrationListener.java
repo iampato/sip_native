@@ -1,2 +1,50 @@
-package me.iampato.sip_native;public class MySipRegistrationListener {
+package me.iampato.sip_native;
+
+import android.net.sip.SipManager;
+import android.net.sip.SipProfile;
+import android.net.sip.SipRegistrationListener;
+import android.os.Handler;
+
+import io.flutter.plugin.common.EventChannel;
+
+public class MySipRegistrationListener implements SipRegistrationListener {
+    final Handler uiThreadHandler;
+    final EventChannel.EventSink events;
+    SipRegistrationState registrationState;
+
+    public MySipRegistrationListener(Handler uiThreadHandler, EventChannel.EventSink events, SipRegistrationState registrationState) {
+        this.uiThreadHandler = uiThreadHandler;
+        this.events = events;
+        this.registrationState = registrationState;
+    }
+
+    @Override
+    public void onRegistering(String localProfileUri) {
+        registrationState = SipRegistrationState.ONREGISTERING;
+        uiThreadHandler.post(
+                () -> {
+                    events.success(registrationState.toString());
+                }
+        );
+    }
+
+    @Override
+    public void onRegistrationDone(String localProfileUri, long expiryTime) {
+        registrationState = SipRegistrationState.ONREGISTRATIONDONE;
+        uiThreadHandler.post(
+                () -> {
+                    events.success(registrationState.toString());
+                }
+        );
+    }
+
+    @Override
+    public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
+        registrationState = SipRegistrationState.ONREGISTRATIONFAILED;
+        uiThreadHandler.post(
+                () -> {
+                    events.success(registrationState.toString());
+                }
+        );
+    }
 }
