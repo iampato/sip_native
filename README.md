@@ -23,7 +23,8 @@ more on this link: https://obem.be/2014/06/04/sip-on-android.html
 
 
 ## Getting Started
-1. #### SipNative plugin supported
+1. #### Install this plugin
+2. #### SipNative plugin supported
    Check if the plugin is supported by the device
 ```
 void main() {
