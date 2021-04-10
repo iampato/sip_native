@@ -7,6 +7,7 @@ import android.net.sip.SipAudioCall;
 import android.net.sip.SipProfile;
 
 public class IncomingCallReceiver extends BroadcastReceiver {
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
