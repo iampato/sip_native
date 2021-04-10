@@ -8,6 +8,7 @@ Currently our team is working on solution that requires and uses sip but availab
 ## Disclaimer
 1. #### Android Supported Only
   Currently only android is supported even though flutter is fully cross platform
+  
 2. #### Support
   Even though the specs states the SIP API is available for Android devices from 2.3, it is not. The Android SIP API is not supported on all devices. Interestingly,   it is supported on my old 2.3 LG P970 and not my 4.4 Moto G. (By the way, you have to test on real device and not the Android emulator).
   Now there are alternatives:
