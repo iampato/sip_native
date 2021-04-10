@@ -8,13 +8,37 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01dc72aa-5964-4274-b125-d230503091a6" name="Default Changelist" comment="" />
+    <list default="true" id="01dc72aa-5964-4274-b125-d230503091a6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipCallListener.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/Utils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipRegistrationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipRegistrationListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipSessionListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipSessionListener.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipDataManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/UserProfile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/example/android/app/src/main/AndroidManifest.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/sip_native.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sip_native.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@VUY9K19305903265]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/home/pato/.android/avd/Pixel_API_24.avd]" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1qvVFRQJdwlyjIlIY9hr3OPRwsW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -25,6 +49,9 @@
     <property name="dart.analysis.tool.window.force.activate" value="true" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/android" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.17" />
+    <property name="project.structure.side.proportion" value="0.2" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -39,25 +66,29 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
+    <state x="480" y="258" width="950" height="524" key="#PSD" timestamp="1618046037670">
+      <screen x="0" y="0" width="1920" height="1046" />
+    </state>
+    <state x="480" y="258" width="950" height="524" key="#PSD/0.0.1920.1046@0.0.1920.1046" timestamp="1618046037670" />
     <state x="743" y="281" width="424" height="478" key="FileChooserDialogImpl" timestamp="1617960489027">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
     <state x="743" y="281" width="424" height="478" key="FileChooserDialogImpl/0.0.1920.1046@0.0.1920.1046" timestamp="1617960489027" />
-    <state width="1878" height="477" key="GridCell.Tab.0.bottom" timestamp="1618001181138">
+    <state width="1878" height="465" key="GridCell.Tab.0.bottom" timestamp="1618046028989">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state width="1878" height="477" key="GridCell.Tab.0.bottom/0.0.1920.1046@0.0.1920.1046" timestamp="1618001181138" />
-    <state width="1878" height="477" key="GridCell.Tab.0.center" timestamp="1618001181136">
+    <state width="1878" height="465" key="GridCell.Tab.0.bottom/0.0.1920.1046@0.0.1920.1046" timestamp="1618046028989" />
+    <state width="1878" height="465" key="GridCell.Tab.0.center" timestamp="1618046028989">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state width="1878" height="477" key="GridCell.Tab.0.center/0.0.1920.1046@0.0.1920.1046" timestamp="1618001181136" />
-    <state width="1878" height="477" key="GridCell.Tab.0.left" timestamp="1618001181135">
+    <state width="1878" height="465" key="GridCell.Tab.0.center/0.0.1920.1046@0.0.1920.1046" timestamp="1618046028989" />
+    <state width="1878" height="465" key="GridCell.Tab.0.left" timestamp="1618046028988">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state width="1878" height="477" key="GridCell.Tab.0.left/0.0.1920.1046@0.0.1920.1046" timestamp="1618001181135" />
-    <state width="1878" height="477" key="GridCell.Tab.0.right" timestamp="1618001181137">
+    <state width="1878" height="465" key="GridCell.Tab.0.left/0.0.1920.1046@0.0.1920.1046" timestamp="1618046028988" />
+    <state width="1878" height="465" key="GridCell.Tab.0.right" timestamp="1618046028989">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state width="1878" height="477" key="GridCell.Tab.0.right/0.0.1920.1046@0.0.1920.1046" timestamp="1618001181137" />
+    <state width="1878" height="465" key="GridCell.Tab.0.right/0.0.1920.1046@0.0.1920.1046" timestamp="1618046028989" />
   </component>
 </project>
