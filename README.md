@@ -79,7 +79,7 @@ The stream emits Strings, and the following are events emited
     print(e.toString());  
   }
 ```
-4. #### Sip init call
+4. #### Sip init audio call
 A future that returns void and takes two parameters 
   1. Username
 
