@@ -65,10 +65,10 @@ You can further specify other parameters i.e
 
 3. #### Sip connection status listener
 The stream emits Strings, and the following are events emited
-  1. UNKNOWN -> we do not know anything (it's the initial)
-  2. ONREGISTERING -> attempting to connect
-  3. ONREGISTRATIONDONE -> connected all is well
-  4. ONREGISTRATIONFAILED -> an error occurred and you should wrap this function in a try catch to catch the exception plus the reason for the failure
+  1. `UNKNOWN` -> we do not know anything (it's the initial)
+  2. `ONREGISTERING` -> attempting to connect
+  3. `ONREGISTRATIONDONE` -> connected all is well
+  4. `ONREGISTRATIONFAILED` -> an error occurred and you should wrap this function in a try catch to catch the exception plus the reason for the failure
 ```
   try {
     SipNative.registrationStateStream().listen((event) {
@@ -84,7 +84,7 @@ The stream emits Strings, and the following are events emited
 A future that returns void and takes two parameters 
   1. Username
   2. Domain 
-  
+
 since in the background the plugin generates a profile uri:
 example username: test_user and domain: test_domain will be 
 `test_user@test_domain`
