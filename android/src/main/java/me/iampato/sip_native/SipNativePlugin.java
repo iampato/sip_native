@@ -41,6 +41,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
     private ActivityPluginBinding activityPluginBinding;
     private SipDataManager sipDataManager;
     private Utils utils;
+    private CallsEventChannel callsEventChannel;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -65,8 +66,9 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
         // setup event channels
         EventChannel eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/register_events");
         eventChannel.setStreamHandler(this);
-//        EventChannel callsEventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/calls_events");
-//        callsEventChannel.setStreamHandler(this);
+        callsEventChannel = new CallsEventChannel(sipDataManager, sipCallState);
+        EventChannel callsEvent = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/calls_events");
+        callsEvent.setStreamHandler(callsEventChannel);
     }
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
@@ -116,9 +118,8 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                     String domain = call.argument("domain");
                     int port = call.argument("port");
                     String protocol = call.argument("protocol");
-                    UserProfile userProfile = new UserProfile(username, password, domain, port, protocol);
-                    sipDataManager.setUserProfile(userProfile);
-                    sipDataManager.initializeProfile();
+
+                    sipDataManager.initializeProfile(username, password, domain, port, protocol);
                     result.success(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -135,46 +136,26 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                 }
                 break;
             case "initCall":
-                try {
-                    String profileUri = call.argument("uri");
-                    sipDataManager.makeCall(result, profileUri);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    result.error(null, e.toString(), null);
-                }
+                String username = call.argument("uri");
+                sipDataManager.makeCall(result, username);
+
                 break;
             case "endCall":
-                try {
-                    sipDataManager.endCall(result);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    result.error(null, e.toString(), null);
-                }
+                sipDataManager.endCall(result);
+
                 break;
             case "holdCall":
-                try {
-                    sipDataManager.holdCall(result);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    result.error(null, e.toString(), null);
-                }
+                sipDataManager.holdCall(result);
+
                 break;
             case "muteCall":
-                try {
-                    sipDataManager.muteCall(result);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    result.error(null, e.toString(), null);
-                }
+                sipDataManager.muteCall(result);
+
                 break;
             case "speakerMode":
-                try {
-                    boolean mode = call.argument("mode");
-                    sipDataManager.callSpeakerMode(result, mode);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    result.error(null, e.toString(), null);
-                }
+                boolean mode = call.argument("mode");
+                sipDataManager.callSpeakerMode(result, mode);
+
                 break;
             default:
                 result.notImplemented();
