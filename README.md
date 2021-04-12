@@ -55,9 +55,9 @@ You can further specify other parameters i.e
 2. Port -> By default the port is 5060
 ```
   bool response = await SipNative.initSipConnection(
-    username: username,
-    password: password,
-    domain: domain,
+    username: "test_username",
+    password: "test_password",
+    domain: "sip.linphone.org",
   );
 
 ```
