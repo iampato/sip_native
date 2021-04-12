@@ -3,7 +3,7 @@
 A native SIP flutter plugin
 
 ## Motivation
-Currently our team is working on solution that requires and uses sip but available sip packages only support websocket and after struggles using it we were disappointed, so we decided to build one from scratch using [link here ](https://developer.android.com/guide/topics/connectivity/sip)
+Currently our team is working on solution that requires and uses sip but available sip packages only support websocket as a connection protocol and after struggles using it we were disappointed, so we decided to build one from scratch using [link here ](https://developer.android.com/guide/topics/connectivity/sip)
 
 ## Disclaimer
 1. #### Android Supported Only
