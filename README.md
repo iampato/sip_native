@@ -64,6 +64,22 @@ You can further specify other parameters i.e
 
 
 3. #### Sip connection status listener
+The stream emits Strings, and the following are events emited
+  1. UNKNOWN -> we do not know anything (it's the initial)
+  2. ONREGISTERING -> attempting to connect
+  3. ONREGISTRATIONDONE -> connected all is well
+  4. ONREGISTRATIONFAILED -> an error occurred and you should wrap this function in a try catch to catch the exception plus the reason for the failure
+```
+  try {
+    SipNative.registrationStateStream().listen((event) {
+      setState(() {
+        _registrationState = event.toString();
+      });
+    });
+  } catch (e) {
+    print(e.toString());  
+  }
+```
 4. #### Sip init call
 5. #### Sip call state status listener
 6. #### Sip hold call
