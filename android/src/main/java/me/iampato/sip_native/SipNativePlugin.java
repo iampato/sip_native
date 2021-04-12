@@ -50,7 +50,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
         if (this.sipDataManager == null) {
             sipDataManager = new SipDataManager(flutterPluginBinding.getApplicationContext(), uiThreadHandler);
             try {
-                sipDataManager.initialize();
+                sipDataManager.initialize(flutterPluginBinding.getApplicationContext());
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -65,8 +65,8 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
         // setup event channels
         EventChannel eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/register_events");
         eventChannel.setStreamHandler(this);
-        EventChannel callsEventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/calls_events");
-        callsEventChannel.setStreamHandler(this);
+//        EventChannel callsEventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/calls_events");
+//        callsEventChannel.setStreamHandler(this);
     }
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
@@ -212,7 +212,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
         if (this.sipDataManager == null) {
             sipDataManager = new SipDataManager(binding.getActivity().getApplicationContext(), uiThreadHandler);
             try {
-                sipDataManager.initialize();
+                sipDataManager.initialize(binding.getActivity().getApplicationContext());
             } catch (Exception e) {
                 e.printStackTrace();
             }

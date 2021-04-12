@@ -40,7 +40,7 @@ public class SipDataManager {
     }
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    public void initialize() throws Exception {
+    public void initialize(Context context) {
         Log.d(TAG, "initialize manager");
         if (sipManager == null) {
             Log.d(TAG, "sip manager is not null");
@@ -79,10 +79,14 @@ public class SipDataManager {
             Log.d(TAG, "Sip manager cannot be null");
         }
         try {
-            SipProfile.Builder builder = new SipProfile.Builder(userProfile.getUsername(), userProfile.getDomain());
-            builder.setPassword(userProfile.getPassword());
-            builder.setPort(userProfile.getPort());
-            builder.setProtocol(userProfile.getProtocol());
+//            SipProfile.Builder builder = new SipProfile.Builder(userProfile.getUsername(), userProfile.getDomain());
+//            builder.setPassword(userProfile.getPassword());
+//            builder.setPort(userProfile.getPort());
+//            builder.setProtocol(userProfile.getProtocol());
+            SipProfile.Builder builder = new SipProfile.Builder("254717008247", "138.68.167.56");
+            builder.setPassword("475bbd248835981240e0fab16cdeb5af");
+            builder.setPort(5060);
+            builder.setProtocol("UDP");
             builder.setAutoRegistration(true);
             sipProfile = builder.build();
 //            Intent intent = new Intent();
@@ -100,7 +104,6 @@ public class SipDataManager {
         if (sipManager != null && this.sipProfile != null) {
             try {
                 SipRegistrationListener listener = new MySipRegistrationListener(uiThreadHandler, events, registrationState);
-
                 sipManager.setRegistrationListener(sipProfile.getUriString(), listener);
 
                 Log.d("Called", "called this");
@@ -108,8 +111,9 @@ public class SipDataManager {
                 Log.d("Called", sipProfile.getUserName());
                 Log.d("Called", String.valueOf(sipProfile.getPort()));
                 Log.d("Called", sipProfile.getProtocol());
+                Log.d("Called", sipProfile.getPassword());
                 Log.d("Called", String.valueOf(sipManager.isOpened(sipProfile.getUriString())));
-                
+
             }catch (Exception e){
                 e.printStackTrace();
             }
