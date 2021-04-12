@@ -95,18 +95,23 @@ example username: test_user and domain: test_domain will be
 ```
 6. #### Sip hold call
 ```
+await SipNative.holdCall();
 ```
 7. #### Sip mute call
 ```
+await SipNative.muteCall();
 ```
 8. #### Sip speaker mode
 ```
+await SipNative.changeSpeakerMode();
 ```
 9. #### Sip end call
 ```
+await SipNative.endCall();
 ```
 10. #### Sip disconnect
 ```
+await SipNative.disconnectSip();
 ```
 
 This project is a starting point for a Flutter
