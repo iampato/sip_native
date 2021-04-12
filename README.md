@@ -84,6 +84,7 @@ The stream emits Strings, and the following are events emited
 A future that returns void and takes two parameters 
   1. Username
   2. Domain 
+  
 since in the background the plugin generates a profile uri:
 example username: test_user and domain: test_domain will be 
 `test_user@test_domain`
