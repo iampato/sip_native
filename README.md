@@ -136,3 +136,7 @@ samples, guidance on mobile development, and a full API reference.
 ## Advice
 
 Always call `SipNative.disconnectSip()` while closing the app to clear any sip session created
+
+## Special Thanks to:
+1. Arther Kamau [link](https://github.com/Arthur-Kamau)
+2. BenBera Kemboi [link](https://github.com/BenBera)
