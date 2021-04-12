@@ -1,5 +1,6 @@
 package me.iampato.sip_native;
 
+import android.annotation.TargetApi;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
@@ -7,6 +8,8 @@ import android.net.sip.SipAudioCall;
 import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
+import android.net.sip.SipSession;
+import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
@@ -26,6 +29,7 @@ public class SipDataManager {
     /// A SipProfile defines a SIP profile, including a SIP account, and domain
     /// and server information.
     public SipProfile sipProfile;
+    private SipSession session;
     private Context context;
     private SipAudioCall call;
     private UserProfile userProfile;
@@ -35,6 +39,7 @@ public class SipDataManager {
         this.uiThreadHandler = uiThreadHandler;
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void initialize() throws Exception {
         Log.d(TAG, "initialize manager");
         if (sipManager == null) {
@@ -43,6 +48,7 @@ public class SipDataManager {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public boolean isVoipSupported(Context context) {
         boolean isVoipSupported = false;
         // check if Sip manager is supported
@@ -55,6 +61,7 @@ public class SipDataManager {
         return isVoipSupported;
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public boolean isSipManagerSupported(Context context) {
         boolean isSipManagerSupported = false;
         if (SipManager.isApiSupported(context)) {
@@ -66,20 +73,21 @@ public class SipDataManager {
         return isSipManagerSupported;
     }
 
-    public void initializeProfile() throws Exception {
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
+    public void initializeProfile()  {
         if (sipManager == null) {
-            throw new Exception("Sip manager cannot be null");
+            Log.d(TAG, "Sip manager cannot be null");
         }
         try {
             SipProfile.Builder builder = new SipProfile.Builder(userProfile.getUsername(), userProfile.getDomain());
             builder.setPassword(userProfile.getPassword());
-            builder.setPort(userProfile.port);
-            builder.setProtocol(userProfile.Protocol);
+            builder.setPort(userProfile.getPort());
+            builder.setProtocol(userProfile.getProtocol());
             builder.setAutoRegistration(true);
-            this.sipProfile = builder.build();
-            Intent intent = new Intent();
-            intent.setAction("android.SipDemo.INCOMING_CALL");
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, Intent.FILL_IN_DATA);
+            sipProfile = builder.build();
+//            Intent intent = new Intent();
+//            intent.setAction("android.SipDemo.INCOMING_CALL");
+//            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, Intent.FILL_IN_DATA);
             sipManager.open(sipProfile);
 
         } catch (Exception e) {
@@ -87,18 +95,37 @@ public class SipDataManager {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void setupRegistrationStream(final EventChannel.EventSink events, SipRegistrationState registrationState) throws Exception {
         if (sipManager != null && this.sipProfile != null) {
-            SipRegistrationListener listener = new MySipRegistrationListener(uiThreadHandler, events, registrationState);
-            sipManager.setRegistrationListener(sipProfile.getUriString(), listener);
+            try {
+                SipRegistrationListener listener = new MySipRegistrationListener(uiThreadHandler, events, registrationState);
+
+                sipManager.setRegistrationListener(sipProfile.getUriString(), listener);
+
+                Log.d("Called", "called this");
+                Log.d("Called", sipProfile.getSipDomain());
+                Log.d("Called", sipProfile.getUserName());
+                Log.d("Called", String.valueOf(sipProfile.getPort()));
+                Log.d("Called", sipProfile.getProtocol());
+                Log.d("Called", String.valueOf(sipManager.isOpened(sipProfile.getUriString())));
+                
+            }catch (Exception e){
+                e.printStackTrace();
+            }
         } else {
-            throw new Exception("sip manager || sip profile cannot be null");
+            if (sipManager == null) {
+                throw new Exception("sip manager cannot be null");
+            } else {
+                throw new Exception("sip profile cannot be null");
+            }
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void makeCall(MethodChannel.Result result, String address) {
         try {
-            call = sipManager.makeAudioCall(sipProfile.getUriString(), address,null , 30);
+            call = sipManager.makeAudioCall(sipProfile.getUriString(), address, null, 30);
             if (call != null) {
                 result.success(true);
             } else {
@@ -110,6 +137,7 @@ public class SipDataManager {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void setupCallStateStream(final EventChannel.EventSink events, SipCallState sipCallState) throws Exception {
         if (call != null) {
             call.setListener(new MySipCallListener(uiThreadHandler, events, sipCallState));
@@ -118,6 +146,7 @@ public class SipDataManager {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void endCall(MethodChannel.Result result) {
         try {
             if (call != null) {
@@ -133,6 +162,7 @@ public class SipDataManager {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void holdCall(MethodChannel.Result result) {
         try {
             if (call != null) {
@@ -148,6 +178,7 @@ public class SipDataManager {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void callSpeakerMode(MethodChannel.Result result, boolean value) {
         try {
             if (call != null) {
@@ -163,6 +194,7 @@ public class SipDataManager {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void muteCall(MethodChannel.Result result) {
         try {
             if (call != null) {
@@ -178,6 +210,7 @@ public class SipDataManager {
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public boolean dispose() {
         if (sipManager == null || call == null) {
             return true;

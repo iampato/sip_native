@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
 
 /// enum that respresent the different sip protocol supported
-enum SipProtocol {UDP,TCP,TLS}
+enum SipProtocol { UDP, TCP, TLS }
 
 class SipNativeSupport {
   final bool isVoipSupported;
@@ -42,7 +42,6 @@ class SipNative {
     _streamController.sink.add("UNKNOWN");
     _connectedNotifier.addListener(() {
       if (_connectedNotifier.value == true) {
-        debugPrint("Hallelujah");
         _streamSubscription =
             _eventChannel.receiveBroadcastStream().listen((event) {
           if (_streamController == null) {
@@ -89,8 +88,12 @@ class SipNative {
     @required String username,
     @required String password,
     @required String domain,
-    int port = 5060, /// default UDP port is 5060
-    SipProtocol sipProtocol = SipProtocol.UDP, /// default protocol is UDP
+    int port = 5060,
+
+    /// default UDP port is 5060
+    SipProtocol sipProtocol = SipProtocol.UDP,
+
+    /// default protocol is UDP
   }) async {
     bool response = await _methodChannel.invokeMethod(
       'initSip',
@@ -98,8 +101,8 @@ class SipNative {
         'username': username,
         'password': password,
         'domain': domain,
-        'port':port,
-        'protocol':sipProtocol.toString(),
+        'port': port,
+        'protocol': getProtocol(sipProtocol),
       },
     );
     if (response) {
@@ -132,6 +135,7 @@ class SipNative {
   static Future<bool> holdCall() async {
     return await _methodChannel.invokeMethod("holdCall");
   }
+
   /// muteCall
   /// returns a future boolean if true the call muted successfully
   /// an exception is thrown if there was no call in progress was found
@@ -169,5 +173,25 @@ class SipNative {
     }
     _streamSubscription?.cancel();
     _streamController.close();
+  }
+
+  static String getProtocol(SipProtocol sipProtocol) {
+    String protocol;
+
+    switch (sipProtocol) {
+      case SipProtocol.UDP:
+        protocol = "UDP";
+        break;
+      case SipProtocol.TLS:
+        protocol = "TLS";
+        break;
+      case SipProtocol.TCP:
+        protocol = "TCP";
+        break;
+      default:
+        protocol = "UDP";
+        break;
+    }
+    return protocol;
   }
 }

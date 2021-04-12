@@ -4,6 +4,7 @@ import android.net.sip.SipManager;
 import android.net.sip.SipProfile;
 import android.net.sip.SipRegistrationListener;
 import android.os.Handler;
+import android.util.Log;
 
 import io.flutter.plugin.common.EventChannel;
 
@@ -41,6 +42,8 @@ public class MySipRegistrationListener implements SipRegistrationListener {
     @Override
     public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
         registrationState = SipRegistrationState.ONREGISTRATIONFAILED;
+        Log.d("SIP_NATIVE",errorMessage);
+        Log.d("SIP_NATIVE","Error code "+String.valueOf(errorCode));
         uiThreadHandler.post(
                 () -> {
                     events.success(registrationState.toString());
