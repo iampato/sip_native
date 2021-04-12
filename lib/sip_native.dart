@@ -25,6 +25,8 @@ class SipNative {
       const MethodChannel('sip_native/method');
   static const EventChannel _eventChannel =
       const EventChannel('sip_native/register_events');
+  static const EventChannel _callsChannel =
+      const EventChannel("sip_native/calls_events");
 
   /// registrationStateStream
   /// return stream of the different sip connections state
@@ -36,10 +38,10 @@ class SipNative {
   ///    in a try catch to catch the exception plus the reason for the failure
   static Stream<String> registrationStateStream() {
     _streamSubscription?.cancel();
-    if (_streamController == null) {
+    if (_streamController == null || !_streamController.hasListener) {
       _streamController = StreamController.broadcast();
     }
-    _streamController.sink.add("UNKNOWN");
+    // _streamController.sink.add("UNKNOWN");
     _connectedNotifier.addListener(() {
       if (_connectedNotifier.value == true) {
         _streamSubscription =
@@ -53,6 +55,11 @@ class SipNative {
     });
 
     return _streamController.stream;
+  }
+
+  /// callsStateStream
+  static Stream callsStateStream() {
+    return _callsChannel.receiveBroadcastStream().asBroadcastStream();
   }
 
   /// initPlugin
@@ -112,12 +119,12 @@ class SipNative {
   }
 
   /// initCall
-  /// requires caller username and the server domain
-  static Future<void> initCall(String username, String domain) async {
-    await _methodChannel.invokeMethod(
+  /// requires caller username
+  static Future<bool> initCall(String username) async {
+   return await _methodChannel.invokeMethod(
       'initCall',
       <String, dynamic>{
-        'uri': "$username@$domain",
+        'uri': "$username",
       },
     );
   }
@@ -177,7 +184,6 @@ class SipNative {
 
   static String getProtocol(SipProtocol sipProtocol) {
     String protocol;
-
     switch (sipProtocol) {
       case SipProtocol.UDP:
         protocol = "UDP";

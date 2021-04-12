@@ -9,12 +9,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _registrationState = "";
+  String _registrationState = "UNKNOWN";
+  String _callsState = "UNKNOWN";
 
   @override
   void initState() {
     super.initState();
     initRegistrationStream();
+  }
+
+  @override
+  void dispose() {
+    SipNative.disconnectSip();
+    super.dispose();
   }
 
   initRegistrationStream() {
@@ -28,6 +35,21 @@ class _HomePageState extends State<HomePage> {
       print(e.toString());
       Fluttertoast.showToast(
         msg: "Registration stream error\n${e.toString()}",
+      );
+    }
+  }
+
+  initCallsStream() {
+    try {
+      SipNative.callsStateStream().listen((event) {
+        setState(() {
+          _callsState = event.toString();
+        });
+      });
+    } catch (e) {
+      print(e.toString());
+      Fluttertoast.showToast(
+        msg: "Calls stream error\n${e.toString()}",
       );
     }
   }
@@ -58,21 +80,22 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: Text('Registration state: $_registrationState\n'),
             ),
+            Text('Calls state: $_callsState\n'),
             Wrap(
               spacing: 5,
               children: [
                 ElevatedButton(
-                  child: Text("Get permissions"),
+                  child: Text("1. Get permissions"),
                   onPressed: () async {
                     await SipNative.requestPermissions();
                   },
                 ),
                 ElevatedButton(
-                  child: Text("SIP connect"),
+                  child: Text("2. SIP connect"),
                   onPressed: () async {
-                    String username = "";
-                    String password = "";
-                    String domain = "";
+                    String username = "254717008247";
+                    String password = "475bbd248835981240e0fab16cdeb5af";
+                    String domain = "138.68.167.56";
                     bool response = await connectToSip(
                       username,
                       password,
@@ -82,13 +105,13 @@ class _HomePageState extends State<HomePage> {
                   },
                 ),
                 ElevatedButton(
-                  child: Text("Init registration stream"),
+                  child: Text("3. Init registration stream"),
                   onPressed: () {
                     initRegistrationStream();
                   },
                 ),
                 ElevatedButton(
-                  child: Text("SIP disconnect"),
+                  child: Text("3. SIP disconnect"),
                   onPressed: () async {
                     await SipNative.disconnectSip();
                   },
@@ -96,7 +119,10 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   child: Text("Init call"),
                   onPressed: () async {
-                    await SipNative.initCall("","");
+                    bool res = await SipNative.initCall("254727751850");
+                    if (res) {
+                      initCallsStream();
+                    }
                   },
                 ),
               ],
