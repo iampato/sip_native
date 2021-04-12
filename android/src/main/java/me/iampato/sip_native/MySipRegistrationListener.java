@@ -49,5 +49,10 @@ public class MySipRegistrationListener implements SipRegistrationListener {
                     events.success(registrationState.toString());
                 }
         );
+        uiThreadHandler.post(
+                () -> {
+                    events.error(null,"Registration onError" + "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage,null);
+                }
+        );
     }
 }

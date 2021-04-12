@@ -106,5 +106,10 @@ public class MySipCallListener extends SipAudioCall.Listener {
                     events.success(sipCallState.toString());
                 }
         );
+        uiThreadHandler.post(
+                () -> {
+                    events.error(null,"call onError" + "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage,null);
+                }
+        );
     }
 }
