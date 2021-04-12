@@ -32,7 +32,6 @@ public class SipDataManager {
     private SipSession session;
     private Context context;
     private SipAudioCall call;
-    private UserProfile userProfile;
 
     public SipDataManager(Context context, Handler uiThreadHandler) {
         this.context = context;
@@ -40,11 +39,14 @@ public class SipDataManager {
     }
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    public void initialize(Context context) {
+    public void initialize(Context context) throws Exception {
         Log.d(TAG, "initialize manager");
         if (sipManager == null) {
             Log.d(TAG, "sip manager is not null");
             sipManager = SipManager.newInstance(context);
+            if (sipManager == null) {
+                throw new Exception("Sip not supported");
+            }
         }
     }
 
@@ -74,49 +76,59 @@ public class SipDataManager {
     }
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    public void initializeProfile()  {
+    public void initializeProfile(String username, String password, String domain, int port, String protocol) throws Exception {
         if (sipManager == null) {
             Log.d(TAG, "Sip manager cannot be null");
         }
-        try {
-//            SipProfile.Builder builder = new SipProfile.Builder(userProfile.getUsername(), userProfile.getDomain());
-//            builder.setPassword(userProfile.getPassword());
-//            builder.setPort(userProfile.getPort());
-//            builder.setProtocol(userProfile.getProtocol());
-            SipProfile.Builder builder = new SipProfile.Builder("254717008247", "138.68.167.56");
-            builder.setPassword("475bbd248835981240e0fab16cdeb5af");
-            builder.setPort(5060);
-            builder.setProtocol("UDP");
-            builder.setAutoRegistration(true);
-            sipProfile = builder.build();
-//            Intent intent = new Intent();
-//            intent.setAction("android.SipDemo.INCOMING_CALL");
-//            PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, Intent.FILL_IN_DATA);
-            sipManager.open(sipProfile);
+        SipProfile.Builder builder = new SipProfile.Builder(username, domain);
+        builder.setPassword(password);
+        builder.setPort(port);
+        builder.setProtocol(protocol);
+        builder.setAutoRegistration(true);
+        sipProfile = builder.build();
+//        sipManager.open(sipProfile);
+        Intent intent = new Intent();
+        intent.setAction("android.SIPNative.INCOMING_CALL");
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.context, 0, intent, Intent.FILL_IN_DATA);
+        SipRegistrationListener registrationListener = new SipRegistrationListener() {
+            @Override
+            public void onRegistering(String localProfileUri) {
+                Log.d(TAG, "sip registering");
+            }
 
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            @Override
+            public void onRegistrationDone(String localProfileUri, long expiryTime) {
+                Log.d(TAG, "sip onRegistrationDone");
+            }
+            @Override
+            public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
+                Log.d(TAG, "sip onRegistrationFailed\n" + "uri: " + localProfileUri + "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage);
+            }
+        };
+        sipManager.open(sipProfile, pendingIntent, registrationListener);
+
     }
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void setupRegistrationStream(final EventChannel.EventSink events, SipRegistrationState registrationState) throws Exception {
         if (sipManager != null && this.sipProfile != null) {
-            try {
-                SipRegistrationListener listener = new MySipRegistrationListener(uiThreadHandler, events, registrationState);
-                sipManager.setRegistrationListener(sipProfile.getUriString(), listener);
+            // emit unknown
+            uiThreadHandler.post(
+                    () -> {
+                        events.success(registrationState.toString());
+                    }
+            );
+            SipRegistrationListener listener = new MySipRegistrationListener(uiThreadHandler, events, registrationState);
+            sipManager.setRegistrationListener(sipProfile.getUriString(), listener);
+//
+//                Log.d("Called", "called this");
+//                Log.d("Called", sipProfile.getSipDomain());
+//                Log.d("Called", sipProfile.getUserName());
+//                Log.d("Called", String.valueOf(sipProfile.getPort()));
+//                Log.d("Called", sipProfile.getProtocol());
+//                Log.d("Called", sipProfile.getPassword());
+//                Log.d("Called", String.valueOf(sipManager.isOpened(sipProfile.getUriString())));
 
-                Log.d("Called", "called this");
-                Log.d("Called", sipProfile.getSipDomain());
-                Log.d("Called", sipProfile.getUserName());
-                Log.d("Called", String.valueOf(sipProfile.getPort()));
-                Log.d("Called", sipProfile.getProtocol());
-                Log.d("Called", sipProfile.getPassword());
-                Log.d("Called", String.valueOf(sipManager.isOpened(sipProfile.getUriString())));
-
-            }catch (Exception e){
-                e.printStackTrace();
-            }
         } else {
             if (sipManager == null) {
                 throw new Exception("sip manager cannot be null");
@@ -127,9 +139,60 @@ public class SipDataManager {
     }
 
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
-    public void makeCall(MethodChannel.Result result, String address) {
+    public void makeCall(MethodChannel.Result result, String username) {
+        String address = username + "@" + sipProfile.getSipDomain();
+        Log.d(TAG,"Sip address: "+address);
+        Log.d(TAG,"Sip address: "+address);
+
         try {
-            call = sipManager.makeAudioCall(sipProfile.getUriString(), address, null, 30);
+            Log.d(TAG,"Sip manager open?: "+sipManager.isOpened(sipProfile.getUriString()));
+//            SipAudioCall.Listener listener = new SipAudioCall.Listener() {
+//                @Override
+//                public void onCalling(SipAudioCall call) {
+//                    Log.d(TAG,"call onCalling");
+//                }
+//
+//                @Override
+//                public void onRinging(SipAudioCall call, SipProfile caller) {
+//                    Log.d(TAG,"call onRinging");
+//                }
+//
+//                @Override
+//                public void onRingingBack(SipAudioCall call) {
+//                    Log.d(TAG,"call onRingingBack");
+//                }
+//
+//                @Override
+//                public void onReadyToCall(SipAudioCall call) {
+//                    Log.d(TAG,"call onReadyToCall");
+//                }
+//                // Much of the client's interaction with the SIP Stack will
+//                // happen via listeners.  Even making an outgoing call, don't
+//                // forget to set up a listener to set things up once the call is established.
+//                @Override
+//                public void onCallEstablished(SipAudioCall call) {
+//                    Log.d(TAG,"call onCallEstablished");
+//                    call.startAudio();
+//                    call.setSpeakerMode(true);
+//                    call.toggleMute();
+//                }
+//
+//                @Override
+//                public void onCallEnded(SipAudioCall call) {
+//                    Log.d(TAG,"call onCallEnded");
+//                }
+//                @Override
+//                public void onCallBusy(SipAudioCall call) {
+//                    Log.d(TAG,"call onCallBusy");
+//
+//                }
+//                @Override
+//                public void onError(SipAudioCall call, int errorCode,
+//                                    String errorMessage) {
+//                    Log.d(TAG,"call onError"+ "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage);
+//                }
+//            };
+            call = sipManager.makeAudioCall(sipProfile.getUriString(), address, null, 0);
             if (call != null) {
                 result.success(true);
             } else {
@@ -234,9 +297,6 @@ public class SipDataManager {
         }
     }
 
-    public void setUserProfile(UserProfile userProfile) {
-        this.userProfile = userProfile;
-    }
 
     public SipManager getSipManager() {
         return sipManager;
