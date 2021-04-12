@@ -82,16 +82,25 @@ The stream emits Strings, and the following are events emited
 4. #### Sip init call
 A future that returns void and takes two parameters 
   1. Username
-  2. Domain 
 
 since in the background the plugin generates a profile uri:
 example username: test_user and domain: test_domain will be 
-`test_user@test_domain`
+`test_user@test_domain` the domain will be gotten from sip manager
 ```
- await SipNative.initCall("test_user","test_domain");
+ await SipNative.initCall("test_user");
 ```
 5. #### Sip call state status listener
 ```
+The stream emits Strings, and the following are events emited
+  1. `UNKNOWN` -> we do not know anything (it's the initial)
+  2. ONCALLING,
+  3. ONRINGING,
+  4. ONRINGINGBACK,
+  5. ONREADYTOCALL,
+  6. ONCALLESTABLISHED,
+  7. ONCALLENDED,
+  8. ONCALLBUSY,
+  9. ONERROR,
 ```
 6. #### Sip hold call
 ```
