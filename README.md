@@ -27,18 +27,18 @@ more on this link: https://obem.be/2014/06/04/sip-on-android.html
 2. #### SipNative plugin supported
    Check if the plugin is supported by the device
 ```
-void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  SipNative.initPlugin().then((SipNativeSupport value) {
-    Fluttertoast.showToast(
-      msg: "Voip supported: ${value.isVoipSupported}\n" +
-          "SipManager supported: ${value.isSipManagerSupported}",
-      backgroundColor: value.isVoipSupported ? Colors.green : Colors.red,
-      toastLength: Toast.LENGTH_LONG,
-    );
-  });
-  runApp(MyApp());
-}
+    void main() {
+      WidgetsFlutterBinding.ensureInitialized();
+      SipNative.initPlugin().then((SipNativeSupport value) {
+        Fluttertoast.showToast(
+          msg: "Voip supported: ${value.isVoipSupported}\n" +
+              "SipManager supported: ${value.isSipManagerSupported}",
+          backgroundColor: value.isVoipSupported ? Colors.green : Colors.red,
+          toastLength: Toast.LENGTH_LONG,
+        );
+      });
+      runApp(MyApp());
+    }
    
 ```
 
