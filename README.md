@@ -43,6 +43,18 @@ more on this link: https://obem.be/2014/06/04/sip-on-android.html
 ```
 
 2. #### Sip connect
+```
+    bool response = await SipNative.initSipConnection(
+      username: username,
+      password: password,
+      domain: domain,
+    );
+
+```
+You can further specify other parameters i.e
+1. Protocol -> support protocols are UDP,TLS,TCP
+2. Port -> By default the port is 5060
+
 3. #### Sip connection status listener
 4. #### Sip init call
 5. #### Sip call state status listener
