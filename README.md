@@ -54,11 +54,11 @@ You can further specify other parameters i.e
 1. Protocol -> support protocols are UDP,TLS,TCP
 2. Port -> By default the port is 5060
 ```
-    bool response = await SipNative.initSipConnection(
-      username: username,
-      password: password,
-      domain: domain,
-    );
+  bool response = await SipNative.initSipConnection(
+    username: username,
+    password: password,
+    domain: domain,
+  );
 
 ```
 
