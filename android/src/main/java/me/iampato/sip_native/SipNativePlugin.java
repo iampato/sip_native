@@ -169,23 +169,23 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                     Intent intent = new Intent();
                     intent.setAction("android.SIPNative.INCOMING_CALL");
                     PendingIntent pendingIntent = PendingIntent.getBroadcast(this.pluginBinding.getApplicationContext(), 0, intent, Intent.FILL_IN_DATA);
-                    sipManager.open(sipProfile);
-//                    sipManager.open(sipProfile, pendingIntent, new SipRegistrationListener() {
-//                        @Override
-//                        public void onRegistering(String localProfileUri) {
-//                            Log.d(TAG, "sip registering");
-//                        }
-//
-//                        @Override
-//                        public void onRegistrationDone(String localProfileUri, long expiryTime) {
-//                            Log.d(TAG, "sip onRegistrationDone");
-//                        }
-//
-//                        @Override
-//                        public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
-//                            Log.d(TAG, "sip onRegistrationFailed\n"+"uri: "+localProfileUri+"\nError code:"+String.valueOf(errorCode)+"\nError message:"+errorMessage);
-//                        }
-//                    });
+//                    sipManager.open(sipProfile);
+                    sipManager.open(sipProfile, pendingIntent, new SipRegistrationListener() {
+                        @Override
+                        public void onRegistering(String localProfileUri) {
+                            Log.d(TAG, "sip registering");
+                        }
+
+                        @Override
+                        public void onRegistrationDone(String localProfileUri, long expiryTime) {
+                            Log.d(TAG, "sip onRegistrationDone");
+                        }
+
+                        @Override
+                        public void onRegistrationFailed(String localProfileUri, int errorCode, String errorMessage) {
+                            Log.d(TAG, "sip onRegistrationFailed\n"+"uri: "+localProfileUri+"\nError code:"+String.valueOf(errorCode)+"\nError message:"+errorMessage);
+                        }
+                    });
 
                     result.success(true);
                 } catch (Exception e) {
@@ -242,7 +242,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                             Log.d(TAG,"call onError"+ "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage);
                         }
                     };
-                    sipManager.makeAudioCall(sipProfile.getUriString(),"254717008247@138.68.167.56",listener,30);
+                    sipManager.makeAudioCall(sipProfile.getUriString(),"254717008249@138.68.167.56",listener,30);
                 }
                 catch (Exception e) {
                     e.printStackTrace();
@@ -255,6 +255,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
         }
     }
 
+    @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     @Override
     public void onListen(Object arguments, final EventChannel.EventSink events) {
 

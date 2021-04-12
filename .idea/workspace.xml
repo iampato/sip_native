@@ -8,13 +8,21 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="01dc72aa-5964-4274-b125-d230503091a6" name="Default Changelist" comment="" />
+    <list default="true" id="01dc72aa-5964-4274-b125-d230503091a6" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipRegistrationState.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipRegistrationState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/main.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@VUY9K19305903265]" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1qvVFRQJdwlyjIlIY9hr3OPRwsW" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -38,26 +46,29 @@
     </task>
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
   <component name="WindowStateProjectService">
     <state x="743" y="281" width="424" height="478" key="FileChooserDialogImpl" timestamp="1617960489027">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
     <state x="743" y="281" width="424" height="478" key="FileChooserDialogImpl/0.0.1920.1046@0.0.1920.1046" timestamp="1617960489027" />
-    <state width="1878" height="477" key="GridCell.Tab.0.bottom" timestamp="1618001181138">
+    <state width="1878" height="246" key="GridCell.Tab.0.bottom" timestamp="1618219746004">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state width="1878" height="477" key="GridCell.Tab.0.bottom/0.0.1920.1046@0.0.1920.1046" timestamp="1618001181138" />
-    <state width="1878" height="477" key="GridCell.Tab.0.center" timestamp="1618001181136">
+    <state width="1878" height="246" key="GridCell.Tab.0.bottom/0.0.1920.1046@0.0.1920.1046" timestamp="1618219746004" />
+    <state width="1878" height="246" key="GridCell.Tab.0.center" timestamp="1618219746000">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state width="1878" height="477" key="GridCell.Tab.0.center/0.0.1920.1046@0.0.1920.1046" timestamp="1618001181136" />
-    <state width="1878" height="477" key="GridCell.Tab.0.left" timestamp="1618001181135">
+    <state width="1878" height="246" key="GridCell.Tab.0.center/0.0.1920.1046@0.0.1920.1046" timestamp="1618219746000" />
+    <state width="1878" height="246" key="GridCell.Tab.0.left" timestamp="1618219745998">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state width="1878" height="477" key="GridCell.Tab.0.left/0.0.1920.1046@0.0.1920.1046" timestamp="1618001181135" />
-    <state width="1878" height="477" key="GridCell.Tab.0.right" timestamp="1618001181137">
+    <state width="1878" height="246" key="GridCell.Tab.0.left/0.0.1920.1046@0.0.1920.1046" timestamp="1618219745998" />
+    <state width="1878" height="246" key="GridCell.Tab.0.right" timestamp="1618219746002">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state width="1878" height="477" key="GridCell.Tab.0.right/0.0.1920.1046@0.0.1920.1046" timestamp="1618001181137" />
+    <state width="1878" height="246" key="GridCell.Tab.0.right/0.0.1920.1046@0.0.1920.1046" timestamp="1618219746002" />
   </component>
 </project>
