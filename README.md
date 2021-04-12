@@ -59,7 +59,6 @@ You can further specify other parameters i.e
     password: "test_password",
     domain: "sip.linphone.org",
   );
-
 ```
 
 
@@ -90,14 +89,25 @@ example username: test_user and domain: test_domain will be
 `test_user@test_domain`
 ```
  await SipNative.initCall("test_user","test_domain");
-
 ```
 5. #### Sip call state status listener
+```
+```
 6. #### Sip hold call
+```
+```
 7. #### Sip mute call
+```
+```
 8. #### Sip speaker mode
+```
+```
 9. #### Sip end call
+```
+```
 10. #### Sip disconnect
+```
+```
 
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/developing-packages/),
