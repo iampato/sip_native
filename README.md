@@ -24,7 +24,7 @@ more on this link: https://obem.be/2014/06/04/sip-on-android.html
 
 ## Getting Started
 1. #### Install this plugin
-Currently the plugin is not available in (https://pub.dev)[pub.dev] In your pubspec.yaml add the following
+Currently the plugin is not available in [pub.dev](https://pub.dev) In your pubspec.yaml add the following
 ```
   sip_native:
       git:
