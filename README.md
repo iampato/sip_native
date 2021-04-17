@@ -102,6 +102,18 @@ The stream emits Strings, and the following are events emited
   8. ONCALLBUSY,
   9. ONERROR,
 ```
+```
+  try {
+    SipNative.callsStateStream().listen((event) {
+      setState(() {
+        _registrationState = event.toString();
+      });
+    });
+  } catch (e) {
+    print(e.toString());  
+  }
+
+```
 6. #### Sip hold call
 ```
 await SipNative.holdCall();
