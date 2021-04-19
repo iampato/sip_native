@@ -1,4 +1,4 @@
-package me.iampato.sip_native;
+ package me.iampato.sip_native;
 
 import android.net.sip.SipAudioCall;
 import android.net.sip.SipProfile;
@@ -106,10 +106,10 @@ public class MySipCallListener extends SipAudioCall.Listener {
                     events.success(sipCallState.toString());
                 }
         );
-        uiThreadHandler.post(
-                () -> {
-                    events.error(null,"call onError" + "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage,null);
-                }
-        );
+//        uiThreadHandler.post(
+//                () -> {
+//                    events.error(null,"call onError" + "\nError code:" + String.valueOf(errorCode) + "\nError message:" + errorMessage,null);
+//                }
+//        );
     }
 }
