@@ -27,25 +27,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01dc72aa-5964-4274-b125-d230503091a6" name="Default Changelist" comment="Added disclaimer">
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/CallsEventChannel.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipCallListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipCallListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipRegistrationListener.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipRegistrationListener.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/MySipSessionListener.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipDataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/UserProfile.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/example/pubspec.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/sip_native.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sip_native.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sip_native.iml" beforeDir="false" afterPath="$PROJECT_DIR$/sip_native.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@VUY9K19305903265]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/home/pato/.android/avd/Pixel_API_24.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -111,10 +101,10 @@
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
     <state x="480" y="258" width="950" height="524" key="#PSD/0.0.1920.1046@0.0.1920.1046" timestamp="1618046037670" />
-    <state x="743" y="281" width="424" height="478" key="FileChooserDialogImpl" timestamp="1618239452255">
+    <state x="743" y="281" width="424" height="478" key="FileChooserDialogImpl" timestamp="1618818556625">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>
-    <state x="743" y="281" width="424" height="478" key="FileChooserDialogImpl/0.0.1920.1046@0.0.1920.1046" timestamp="1618239452255" />
+    <state x="743" y="281" width="424" height="478" key="FileChooserDialogImpl/0.0.1920.1046@0.0.1920.1046" timestamp="1618818556625" />
     <state x="555" y="258" width="800" height="522" key="Vcs.Push.Dialog.v2" timestamp="1618063116002">
       <screen x="0" y="0" width="1920" height="1046" />
     </state>

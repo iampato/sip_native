@@ -41,7 +41,6 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
     private ActivityPluginBinding activityPluginBinding;
     private SipDataManager sipDataManager;
     private Utils utils;
-    private CallsEventChannel callsEventChannel;
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
@@ -66,7 +65,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
         // setup event channels
         EventChannel eventChannel = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/register_events");
         eventChannel.setStreamHandler(this);
-        callsEventChannel = new CallsEventChannel(sipDataManager, sipCallState);
+        CallsEventChannel callsEventChannel = new CallsEventChannel(sipDataManager, sipCallState);
         EventChannel callsEvent = new EventChannel(flutterPluginBinding.getBinaryMessenger(), "sip_native/calls_events");
         callsEvent.setStreamHandler(callsEventChannel);
     }
