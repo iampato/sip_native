@@ -3,7 +3,7 @@
 A native SIP flutter plugin
 
 ## Motivation
-Currently our team is working on solution that requires and uses sip but available sip packages only support websocket and after struggles using it we were disappointed, so we decided to build one from scratch using [link here ](https://developer.android.com/guide/topics/connectivity/sip)
+Currently our team is working on solution that requires and uses sip but available sip packages only support websocket as a connection protocol and after struggles using it we were disappointed, so we decided to build one from scratch using [link here ](https://developer.android.com/guide/topics/connectivity/sip)
 
 ## Disclaimer
 1. #### Android Supported Only
@@ -24,7 +24,7 @@ more on this link: https://obem.be/2014/06/04/sip-on-android.html
 
 ## Getting Started
 1. #### Install this plugin
-Currently the plugin is not available in (https://pub.dev)[pub.dev] In your pubspec.yaml add the following
+Currently the plugin is not available in [pub.dev](https://pub.dev) In your pubspec.yaml add the following
 ```
   sip_native:
       git:
@@ -102,6 +102,18 @@ The stream emits Strings, and the following are events emited
   8. ONCALLBUSY,
   9. ONERROR,
 ```
+```
+  try {
+    SipNative.callsStateStream().listen((event) {
+      setState(() {
+        _registrationState = event.toString();
+      });
+    });
+  } catch (e) {
+    print(e.toString());  
+  }
+
+```
 6. #### Sip hold call
 ```
 await SipNative.holdCall();
@@ -136,3 +148,7 @@ samples, guidance on mobile development, and a full API reference.
 ## Advice
 
 Always call `SipNative.disconnectSip()` while closing the app to clear any sip session created
+
+## Special Thanks to:
+1. Arther Kamau [link](https://github.com/Arthur-Kamau)
+2. BenBera Kemboi [link](https://github.com/BenBera)
