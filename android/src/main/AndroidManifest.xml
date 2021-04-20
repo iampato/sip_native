@@ -1,9 +1,3 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="me.iampato.sip_native">
-
-    <application android:name="io.flutter.app.FlutterApplication">
-        <receiver
-            android:name=".IncomingCallReceiver"
-            android:label="Call Receiver" />
-    </application>
 </manifest>
