@@ -13,6 +13,8 @@ import android.os.Build;
 import android.os.Handler;
 import android.util.Log;
 
+import org.pjsip.pjsua2.AccountConfig;
+
 import io.flutter.plugin.common.EventChannel;
 import io.flutter.plugin.common.MethodChannel;
 
@@ -33,6 +35,8 @@ public class SipDataManager {
     private Context context;
     private SipAudioCall call;
 
+    private AccountConfig mAccountConfig;
+
     public SipDataManager(Context context, Handler uiThreadHandler) {
         this.context = context;
         this.uiThreadHandler = uiThreadHandler;
@@ -41,6 +45,10 @@ public class SipDataManager {
     @TargetApi(Build.VERSION_CODES.GINGERBREAD)
     public void initialize(Context context) throws Exception {
         Log.d(TAG, "initialize manager");
+        if(mAccountConfig ==null){
+            mAccountConfig = new AccountConfig();
+
+        }
         if (sipManager == null) {
             Log.d(TAG, "sip manager is not null");
             sipManager = SipManager.newInstance(context);

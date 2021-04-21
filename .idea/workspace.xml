@@ -28,6 +28,8 @@
   <component name="ChangeListManager">
     <list default="true" id="01dc72aa-5964-4274-b125-d230503091a6" name="Default Changelist" comment="Added disclaimer">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/android/build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipDataManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipDataManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,7 +37,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/home/pato/.android/avd/Pixel_API_24.avd]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@VUY9K19305903265]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>

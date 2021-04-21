@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
@@ -42,12 +43,31 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
     private SipDataManager sipDataManager;
     private Utils utils;
 
+    public SipNativePlugin() {
+        try {
+            System.loadLibrary("openh264");
+            // Ticket #1937: libyuv is now included as static lib
+            //System.loadLibrary("yuv");
+        } catch (UnsatisfiedLinkError e) {
+            Log.d(TAG, "UnsatisfiedLinkError: " + e.getMessage());
+            Log.d(TAG, "This could be safely ignored if you don't need video.");
+        }
+        try {
+            System.loadLibrary("pjsua2");
+            Log.d(TAG, "Library loaded");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } catch (Error error) {
+            error.printStackTrace();
+        }
+    }
+
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
         pluginBinding = flutterPluginBinding;
 
         // initialize sip manager
-        if (this.sipDataManager == null) {
+        if (sipDataManager == null) {
             sipDataManager = new SipDataManager(flutterPluginBinding.getApplicationContext(), uiThreadHandler);
             try {
                 sipDataManager.initialize(flutterPluginBinding.getApplicationContext());
@@ -81,6 +101,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                             Manifest.permission.WRITE_EXTERNAL_STORAGE,
                             Manifest.permission.USE_SIP,
                             Manifest.permission.RECORD_AUDIO,
+                            Manifest.permission.MODIFY_AUDIO_SETTINGS,
                             Manifest.permission.ACCESS_NETWORK_STATE,
                             Manifest.permission.CHANGE_NETWORK_STATE,
                             Manifest.permission.ACCESS_WIFI_STATE,
@@ -189,7 +210,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
     public void onAttachedToActivity(@NonNull ActivityPluginBinding binding) {
         activityPluginBinding = binding;
         // initialize sip manager
-        if (this.sipDataManager == null) {
+        if (sipDataManager == null) {
             sipDataManager = new SipDataManager(binding.getActivity().getApplicationContext(), uiThreadHandler);
             try {
                 sipDataManager.initialize(binding.getActivity().getApplicationContext());
