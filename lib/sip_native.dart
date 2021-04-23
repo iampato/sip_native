@@ -166,7 +166,10 @@ class SipNative {
 
   /// disconnectSip
   /// close everything
-  static Future<void> disconnectSip() async {
+  Future<void> disconnectSip() async {
+    List<Future> futures = [];
+    if (!_sipStateController.isClosed) futures.add(_sipStateController.close());
+    await Future.wait(futures);
     // try {
     //   _speaker = false;
     //   bool isDisconnected = await _methodChannel.invokeMethod('discSip');

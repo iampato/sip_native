@@ -52,7 +52,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   void dispose() {
-    SipNative.disconnectSip();
+    SipNative().disconnectSip();
     super.dispose();
   }
 
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   child: Text("3. SIP disconnect"),
                   onPressed: () async {
-                    await SipNative.disconnectSip();
+                    await SipNative().disconnectSip();
                   },
                 ),
                 ElevatedButton(
