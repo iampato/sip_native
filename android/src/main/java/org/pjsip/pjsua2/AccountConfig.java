@@ -123,15 +123,24 @@ public class AccountConfig extends PersistentObject {
     return (cPtr == 0) ? null : new AccountVideoConfig(cPtr, false);
   }
 
+  public void setIpChangeConfig(AccountIpChangeConfig value) {
+    pjsua2JNI.AccountConfig_ipChangeConfig_set(swigCPtr, this, AccountIpChangeConfig.getCPtr(value), value);
+  }
+
+  public AccountIpChangeConfig getIpChangeConfig() {
+    long cPtr = pjsua2JNI.AccountConfig_ipChangeConfig_get(swigCPtr, this);
+    return (cPtr == 0) ? null : new AccountIpChangeConfig(cPtr, false);
+  }
+
   public AccountConfig() {
     this(pjsua2JNI.new_AccountConfig(), true);
   }
 
-  public void readObject(ContainerNode node) throws java.lang.Exception {
+  public void readObject(ContainerNode node) throws Exception {
     pjsua2JNI.AccountConfig_readObject(swigCPtr, this, ContainerNode.getCPtr(node), node);
   }
 
-  public void writeObject(ContainerNode node) throws java.lang.Exception {
+  public void writeObject(ContainerNode node) throws Exception {
     pjsua2JNI.AccountConfig_writeObject(swigCPtr, this, ContainerNode.getCPtr(node), node);
   }
 

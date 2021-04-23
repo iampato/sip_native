@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'package:fluttertoast/fluttertoast.dart';
 import 'package:sip_native/sip_native.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,49 +8,52 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String _registrationState = "UNKNOWN";
+  bool _registrationState;
   String _callsState = "UNKNOWN";
+  SipNative _sipNative;
 
   @override
   void initState() {
     super.initState();
-    initRegistrationStream();
+    _sipNative = SipNative();
+    _sipNative.onSipStateChanged.listen((map) {
+      final state = map['call_state'];
+      // final remoteUri = map['remote_uri'];
+      print("************************************");
+      print("******************State: $state******************");
+      print("************************************");
+      switch (state) {
+        case "CALLING":
+          break;
+        case "INCOMING":
+          break;
+
+        case "EARLY":
+          break;
+
+        case "CONNECTING":
+          break;
+
+        case "CONFIRMED":
+          break;
+
+        case "DISCONNECTED":
+          break;
+
+        default:
+          break;
+      }
+
+      setState(() {
+        this._callsState = state;
+      });
+    });
   }
 
   @override
   void dispose() {
     SipNative.disconnectSip();
     super.dispose();
-  }
-
-  initRegistrationStream() {
-    try {
-      SipNative.registrationStateStream().listen((event) {
-        setState(() {
-          _registrationState = event.toString();
-        });
-      });
-    } catch (e) {
-      print(e.toString());
-      Fluttertoast.showToast(
-        msg: "Registration stream error\n${e.toString()}",
-      );
-    }
-  }
-
-  initCallsStream() {
-    try {
-      SipNative.callsStateStream().listen((event) {
-        setState(() {
-          _callsState = event.toString();
-        });
-      });
-    } catch (e) {
-      print(e.toString());
-      Fluttertoast.showToast(
-        msg: "Calls stream error\n${e.toString()}",
-      );
-    }
   }
 
   Future<bool> connectToSip(
@@ -90,26 +92,35 @@ class _HomePageState extends State<HomePage> {
                     await SipNative.requestPermissions();
                   },
                 ),
+                 ElevatedButton(
+                  child: Text("1.1. Init Plugin"),
+                  onPressed: () async {
+                    await SipNative.initPlugin();
+                  },
+                ),
                 ElevatedButton(
                   child: Text("2. SIP connect"),
                   onPressed: () async {
-                    String username = "254717008247";
-                    String password = "475bbd248835981240e0fab16cdeb5af";
+                    String username = "254716843446";
+                    String password = "ad21bd5330b1cdb2725df40a43622ae0";
                     String domain = "138.68.167.56";
                     bool response = await connectToSip(
                       username,
                       password,
                       domain,
                     );
+                    setState(() {
+                      _registrationState = response;
+                    });
                     print("Sip connect response: $response");
                   },
                 ),
-                ElevatedButton(
-                  child: Text("3. Init registration stream"),
-                  onPressed: () {
-                    initRegistrationStream();
-                  },
-                ),
+                // ElevatedButton(
+                //   child: Text("3. Init registration stream"),
+                //   onPressed: () {
+                //     initRegistrationStream();
+                //   },
+                // ),
                 ElevatedButton(
                   child: Text("3. SIP disconnect"),
                   onPressed: () async {
@@ -119,10 +130,10 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   child: Text("Init call"),
                   onPressed: () async {
-                    bool res = await SipNative.initCall("254727751850");
-                    if (res) {
-                      initCallsStream();
-                    }
+                    bool res = await SipNative.initCall("254716843447");
+                    // if (res) {
+                    //   initCallsStream();
+                    // }
                   },
                 ),
               ],

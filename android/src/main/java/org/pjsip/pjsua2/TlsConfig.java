@@ -67,6 +67,30 @@ public class TlsConfig extends PersistentObject {
     return pjsua2JNI.TlsConfig_password_get(swigCPtr, this);
   }
 
+  public void setCaBuf(String value) {
+    pjsua2JNI.TlsConfig_CaBuf_set(swigCPtr, this, value);
+  }
+
+  public String getCaBuf() {
+    return pjsua2JNI.TlsConfig_CaBuf_get(swigCPtr, this);
+  }
+
+  public void setCertBuf(String value) {
+    pjsua2JNI.TlsConfig_certBuf_set(swigCPtr, this, value);
+  }
+
+  public String getCertBuf() {
+    return pjsua2JNI.TlsConfig_certBuf_get(swigCPtr, this);
+  }
+
+  public void setPrivKeyBuf(String value) {
+    pjsua2JNI.TlsConfig_privKeyBuf_set(swigCPtr, this, value);
+  }
+
+  public String getPrivKeyBuf() {
+    return pjsua2JNI.TlsConfig_privKeyBuf_get(swigCPtr, this);
+  }
+
   public void setMethod(pjsip_ssl_method value) {
     pjsua2JNI.TlsConfig_method_set(swigCPtr, this, value.swigValue());
   }
@@ -153,11 +177,11 @@ public class TlsConfig extends PersistentObject {
     this(pjsua2JNI.new_TlsConfig(), true);
   }
 
-  public void readObject(ContainerNode node) throws java.lang.Exception {
+  public void readObject(ContainerNode node) throws Exception {
     pjsua2JNI.TlsConfig_readObject(swigCPtr, this, ContainerNode.getCPtr(node), node);
   }
 
-  public void writeObject(ContainerNode node) throws java.lang.Exception {
+  public void writeObject(ContainerNode node) throws Exception {
     pjsua2JNI.TlsConfig_writeObject(swigCPtr, this, ContainerNode.getCPtr(node), node);
   }
 

@@ -52,6 +52,14 @@ public class OnStreamCreatedParam {
     return pjsua2JNI.OnStreamCreatedParam_streamIdx_get(swigCPtr, this);
   }
 
+  public void setDestroyPort(boolean value) {
+    pjsua2JNI.OnStreamCreatedParam_destroyPort_set(swigCPtr, this, value);
+  }
+
+  public boolean getDestroyPort() {
+    return pjsua2JNI.OnStreamCreatedParam_destroyPort_get(swigCPtr, this);
+  }
+
   public void setPPort(SWIGTYPE_p_void value) {
     pjsua2JNI.OnStreamCreatedParam_pPort_set(swigCPtr, this, SWIGTYPE_p_void.getCPtr(value));
   }

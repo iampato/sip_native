@@ -51,6 +51,14 @@ public class AccountNatConfig extends PersistentObject {
     return pjsua_stun_use.swigToEnum(pjsua2JNI.AccountNatConfig_mediaStunUse_get(swigCPtr, this));
   }
 
+  public void setNat64Opt(pjsua_nat64_opt value) {
+    pjsua2JNI.AccountNatConfig_nat64Opt_set(swigCPtr, this, value.swigValue());
+  }
+
+  public pjsua_nat64_opt getNat64Opt() {
+    return pjsua_nat64_opt.swigToEnum(pjsua2JNI.AccountNatConfig_nat64Opt_get(swigCPtr, this));
+  }
+
   public void setIceEnabled(boolean value) {
     pjsua2JNI.AccountNatConfig_iceEnabled_set(swigCPtr, this, value);
   }
@@ -235,11 +243,11 @@ public class AccountNatConfig extends PersistentObject {
     return pjsua2JNI.AccountNatConfig_udpKaData_get(swigCPtr, this);
   }
 
-  public void readObject(ContainerNode node) throws java.lang.Exception {
+  public void readObject(ContainerNode node) throws Exception {
     pjsua2JNI.AccountNatConfig_readObject(swigCPtr, this, ContainerNode.getCPtr(node), node);
   }
 
-  public void writeObject(ContainerNode node) throws java.lang.Exception {
+  public void writeObject(ContainerNode node) throws Exception {
     pjsua2JNI.AccountNatConfig_writeObject(swigCPtr, this, ContainerNode.getCPtr(node), node);
   }
 

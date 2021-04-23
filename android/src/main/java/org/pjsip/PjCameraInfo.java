@@ -18,10 +18,10 @@
  */
 package org.pjsip;
 
-import java.util.List;
-
 import android.hardware.Camera;
 import android.util.Log;
+
+import java.util.List;
 
 public class PjCameraInfo {
     public int facing;

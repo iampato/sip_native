@@ -6,27 +6,52 @@ import 'package:flutter/services.dart';
 /// enum that respresent the different sip protocol supported
 enum SipProtocol { UDP, TCP, TLS }
 
-class SipNativeSupport {
-  final bool isVoipSupported;
-  final bool isSipManagerSupported;
+// class SipNativeSupport {
+//   final bool isVoipSupported;
+//   final bool isSipManagerSupported;
 
-  SipNativeSupport(this.isVoipSupported, this.isSipManagerSupported);
-}
+//   SipNativeSupport(this.isVoipSupported, this.isSipManagerSupported);
+// }
 
 class SipNative {
   static bool _speaker = false;
   static ValueNotifier _connectedNotifier = ValueNotifier(false);
 
-  static StreamSubscription _streamSubscription;
-  static StreamController<String> _streamController =
-      StreamController.broadcast();
+  final StreamController<Map<dynamic, dynamic>> _sipStateController =
+      StreamController<Map<dynamic, dynamic>>.broadcast();
 
-  static const MethodChannel _methodChannel =
-      const MethodChannel('sip_native/method');
-  static const EventChannel _eventChannel =
-      const EventChannel('sip_native/register_events');
-  static const EventChannel _callsChannel =
-      const EventChannel("sip_native/calls_events");
+  static const MethodChannel _methodChannel = const MethodChannel(
+    'sip_native/method',
+  );
+
+  static final sipNative = SipNative();
+
+  static final SipNative _sipNative = SipNative._internal();
+  factory SipNative() {
+    return _sipNative;
+  }
+  SipNative._internal() {
+    _methodChannel.setMethodCallHandler((MethodCall call) async {
+      try {
+        _doHandlePlatformCall(call);
+      } catch (exception) {
+        print('Unexpected error: $exception');
+      }
+    });
+  }
+
+  static Future<void> _doHandlePlatformCall(MethodCall call) async {
+    final Map<dynamic, dynamic> callArgs = call.arguments as Map;
+    //   final remoteUri = callArgs['remote_uri'];
+    switch (call.method) {
+      case 'method_call_state_changed':
+        sipNative._sipStateController.add(callArgs);
+        break;
+
+      default:
+        print('Unknown method ${call.method} ');
+    }
+  }
 
   /// registrationStateStream
   /// return stream of the different sip connections state
@@ -36,30 +61,8 @@ class SipNative {
   /// 3. ONREGISTRATIONDONE -> connected all is well
   /// 4. ONREGISTRATIONFAILED -> an error occurred and you should wrap this function
   ///    in a try catch to catch the exception plus the reason for the failure
-  static Stream<String> registrationStateStream() {
-    _streamSubscription?.cancel();
-    if (_streamController == null || !_streamController.hasListener) {
-      _streamController = StreamController.broadcast();
-    }
-    // _streamController.sink.add("UNKNOWN");
-    _connectedNotifier.addListener(() {
-      if (_connectedNotifier.value == true) {
-        _streamSubscription =
-            _eventChannel.receiveBroadcastStream().listen((event) {
-          if (_streamController == null) {
-            _streamController = StreamController.broadcast();
-          }
-          _streamController.sink.add(event.toString());
-        });
-      }
-    });
-
-    return _streamController.stream;
-  }
-
-  /// callsStateStream
-  static Stream callsStateStream() {
-    return _callsChannel.receiveBroadcastStream().asBroadcastStream();
+  Stream<Map<dynamic, dynamic>> get onSipStateChanged {
+    return _sipStateController.stream;
   }
 
   /// initPlugin
@@ -68,11 +71,9 @@ class SipNative {
   /// 2. isSipManagerSupported (boolean)
   /// You should always call this method to check if the plugin supports your device
   /// please run the app in a real device <sipmanager> is not supported in emulators
-  static Future<SipNativeSupport> initPlugin() async {
-    Map response = await _methodChannel.invokeMethod('prepSip');
-    bool isVoipSupported = response["voip"];
-    bool isSipManagerSupported = response["voip"];
-    return SipNativeSupport(isVoipSupported, isSipManagerSupported);
+  static Future<bool> initPlugin() async {
+    bool response = await _methodChannel.invokeMethod('prepSip');
+    return response;
   }
 
   /// requestPermissions
@@ -121,7 +122,7 @@ class SipNative {
   /// initCall
   /// requires caller username
   static Future<bool> initCall(String username) async {
-   return await _methodChannel.invokeMethod(
+    return await _methodChannel.invokeMethod(
       'initCall',
       <String, dynamic>{
         'uri': "$username",
@@ -166,20 +167,20 @@ class SipNative {
   /// disconnectSip
   /// close everything
   static Future<void> disconnectSip() async {
-    try {
-      _speaker = false;
-      bool isDisconnected = await _methodChannel.invokeMethod('discSip');
-      debugPrint("isDisconnected: $isDisconnected");
-      if (isDisconnected) {
-        _streamController.sink.add("DISCONNECTED");
-      } else {
-        debugPrint("isDisconnected: $isDisconnected");
-      }
-    } catch (e) {
-      debugPrint(e.toString());
-    }
-    _streamSubscription?.cancel();
-    _streamController.close();
+    // try {
+    //   _speaker = false;
+    //   bool isDisconnected = await _methodChannel.invokeMethod('discSip');
+    //   debugPrint("isDisconnected: $isDisconnected");
+    //   if (isDisconnected) {
+    //     _streamController.sink.add("DISCONNECTED");
+    //   } else {
+    //     debugPrint("isDisconnected: $isDisconnected");
+    //   }
+    // } catch (e) {
+    //   debugPrint(e.toString());
+    // }
+    // _streamSubscription?.cancel();
+    // _streamController.close();
   }
 
   static String getProtocol(SipProtocol sipProtocol) {

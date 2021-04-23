@@ -5,14 +5,7 @@ import 'package:sip_native_example/home.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  SipNative.initPlugin().then((SipNativeSupport value) {
-    Fluttertoast.showToast(
-      msg: "Voip supported: ${value.isVoipSupported}\n" +
-          "SipManager supported: ${value.isSipManagerSupported}",
-      backgroundColor: value.isVoipSupported ? Colors.green : Colors.red,
-      toastLength: Toast.LENGTH_LONG,
-    );
-  });
+
   runApp(MyApp());
 }
 

@@ -203,5 +203,4 @@ public class CallInfo {
   public CallInfo() {
     this(pjsua2JNI.new_CallInfo(), true);
   }
-
 }
