@@ -246,9 +246,7 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
             Log.d(TAG, "Library loaded");
         } catch (Exception e) {
             e.printStackTrace();
-        } catch (Error error) {
-            error.printStackTrace();
-        }
+        } 
     }
 
     @Override
