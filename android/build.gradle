@@ -26,6 +26,7 @@ android {
 
     defaultConfig {
         minSdkVersion 16
+        ndkVersion "21.3.6528147"
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
