@@ -26,10 +26,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import org.pjsip.pjsua2.*;
-import org.pjsip.pjsua2.CallInfo;
-import org.pjsip.pjsua2.CallOpParam;
-import org.pjsip.pjsua2.pjsip_inv_state;
-import org.pjsip.pjsua2.pjsip_status_code;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -44,10 +40,6 @@ import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
 import me.iampato.sip_native.manager.*;
-import me.iampato.sip_native.manager.MyAppObserver;
-import me.iampato.sip_native.manager.MyBuddy;
-import me.iampato.sip_native.manager.MyCall;
-import me.iampato.sip_native.manager.PjSipManager;
 
 /**
  * SipNativePlugin
@@ -358,7 +350,11 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
                     String uri = call.argument("uri");
                     pjsipCall(uri, this.ip,String.valueOf(this.port));
 //                    sipDataManager.makeCall(result, uri);
-
+                case "method_pjsip_deinit":
+                    pjsipDeinit();
+                    break;
+                case "method_pjsip_logout":
+                    pjsipLogout();
                     break;
                 case "endCall":
                     pjsipRefuse();
@@ -504,6 +500,26 @@ public class SipNativePlugin implements FlutterPlugin, MethodCallHandler, Stream
             }
         }
     }
+    private void pjsipLogout() {
+        if (mPjSipManagerState.getCode() > PjSipManagerState.STATE_LOGINED.getCode()) {
+            mPjSipManager.logout();
+            mPjSipManagerState = PjSipManagerState.STATE_INITED;
+            mResult.success(true);
+        } else
+            mResult.success(false);
+    }
+    private void pjsipDeinit() {
+        if (mPjSipManagerState.getCode() > PjSipManagerState.STATE_INITED.getCode()) {
+            mPjSipManager.deinit();
+            if (mReceiver != null)
+                activityPluginBinding.getActivity().getApplication().unregisterReceiver(mReceiver);
+            mReceiver = null;
+            mPjSipManagerState = PjSipManagerState.STATE_UNDEFINED;
+            mResult.success(true);
+        } else
+            mResult.success(false);
+    }
+
 
     private void registerPhoneState() {
         Activity activity = this.activityPluginBinding.getActivity();

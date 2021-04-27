@@ -27,73 +27,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="01dc72aa-5964-4274-b125-d230503091a6" name="Default Changelist" comment="Added disclaimer">
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/PjSipManagerState.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/manager/MyAccount.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/manager/MyAccountConfig.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/manager/MyAppObserver.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/manager/MyBuddy.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/manager/MyCall.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/manager/PjSipManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/AndroidManifest.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/me/iampato/sip_native/SipNativePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/PjCamera.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/PjCamera.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/PjCameraInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/PjCameraInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Account.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Account.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountCallConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountCallConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountMediaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountMediaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountMwiConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountMwiConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountNatConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountNatConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountPresConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountPresConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountRegConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountRegConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountSipConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountSipConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountVideoConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AccountVideoConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudDevManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudDevManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudioDevInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudioDevInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudioMedia.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudioMedia.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudioMediaPlayer.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudioMediaPlayer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudioMediaRecorder.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AudioMediaRecorder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AuthCredInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/AuthCredInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Buddy.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Buddy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/BuddyConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/BuddyConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Call.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Call.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/CallInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/CallInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/CallOpParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/CallOpParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/CallSetting.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/CallSetting.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/ContainerNode.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/ContainerNode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Endpoint.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Endpoint.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/EpConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/EpConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Error.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/Error.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/JsonDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/JsonDocument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/LogConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/LogConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/MediaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/MediaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/MediaEventData.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/MediaEventData.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/MediaFormatVector.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/MediaTransportInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/MediaTransportInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnCallReplacedParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnCallReplacedParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnCallTransferRequestParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnCallTransferRequestParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnCreateMediaTransportSrtpParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnCreateMediaTransportSrtpParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnDtmfDigitParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnDtmfDigitParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnStreamCreatedParam.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/OnStreamCreatedParam.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/PersistentDocument.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/PersistentDocument.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/PersistentObject.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/PersistentObject.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/SslCertInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/SslCertInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/StreamInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/StreamInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/TlsConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/TlsConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/ToneGenerator.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/ToneGenerator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/TransportConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/TransportConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/UaConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/UaConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/VidDevManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/VidDevManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/VideoDevInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/VideoDevInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/VideoPreview.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/VideoPreview.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/VideoWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/VideoWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pj_ssl_sock_proto.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pj_ssl_sock_proto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjmedia_event_type.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjmedia_event_type.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjmedia_tp_proto.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjmedia_tp_proto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjsip_status_code.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjsip_status_code.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjsua2JNI.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjsua2JNI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjsua_call_flag.java" beforeDir="false" afterPath="$PROJECT_DIR$/android/src/main/java/org/pjsip/pjsua2/pjsua_call_flag.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/example/lib/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/example/lib/home.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/sip_native.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/sip_native.dart" afterDir="false" />
     </list>
@@ -102,7 +37,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[SerialNumber@VUY9K19305903265]" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[VirtualDevicePath@/home/pato/.android/avd/Pixel_API_24.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>

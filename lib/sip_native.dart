@@ -40,7 +40,7 @@ class SipNative {
     });
   }
 
-  static Future<void> _doHandlePlatformCall(MethodCall call) async {
+  Future<void> _doHandlePlatformCall(MethodCall call) async {
     final Map<dynamic, dynamic> callArgs = call.arguments as Map;
     //   final remoteUri = callArgs['remote_uri'];
     switch (call.method) {
@@ -71,7 +71,7 @@ class SipNative {
   /// 2. isSipManagerSupported (boolean)
   /// You should always call this method to check if the plugin supports your device
   /// please run the app in a real device <sipmanager> is not supported in emulators
-  static Future<bool> initPlugin() async {
+  Future<bool> initPlugin() async {
     bool response = await _methodChannel.invokeMethod('prepSip');
     return response;
   }
@@ -80,7 +80,7 @@ class SipNative {
   /// returns a future boolean if all is well a true if an error occurred false,and you should wrap this function
   /// in a try catch to catch the exception plus the reason for the failure
   /// please run this first before connecting to a sip server
-  static Future<bool> requestPermissions() async {
+  Future<bool> requestPermissions() async {
     bool response = await _methodChannel.invokeMethod('request_permissions');
     return response ?? false;
   }
@@ -92,7 +92,7 @@ class SipNative {
   /// 3. domain -> String : sip domain required
   /// 4. port -> int : not required default port is 5060 (UDP)
   /// 5. protocol -> String : default is UDP but also TCP and TLS are supported
-  static Future<bool> initSipConnection({
+  Future<bool> initSipConnection({
     @required String username,
     @required String password,
     @required String domain,
@@ -121,7 +121,7 @@ class SipNative {
 
   /// initCall
   /// requires caller username
-  static Future<bool> initCall(String username) async {
+  Future<bool> initCall(String username) async {
     return await _methodChannel.invokeMethod(
       'initCall',
       <String, dynamic>{
@@ -130,24 +130,33 @@ class SipNative {
     );
   }
 
+  ///pjsip deinit
+  Future<bool> pjsipDeinit() async {
+    return await _methodChannel.invokeMethod('method_pjsip_deinit');
+  }
+
+  Future<bool> pjsipLogout() async {
+    return await _methodChannel.invokeMethod('method_pjsip_logout');
+  }
+
   /// endCall
   /// returns a future boolean if true the call ended successfully
   /// an exception is thrown if there was no call in progress was found
-  static Future<bool> endCall() async {
+  Future<bool> endCall() async {
     return await _methodChannel.invokeMethod("endCall");
   }
 
   /// holdCall
   /// returns a future boolean if true the call held successfully
   /// an exception is thrown if there was no call in progress was found
-  static Future<bool> holdCall() async {
+  Future<bool> holdCall() async {
     return await _methodChannel.invokeMethod("holdCall");
   }
 
   /// muteCall
   /// returns a future boolean if true the call muted successfully
   /// an exception is thrown if there was no call in progress was found
-  static Future<bool> muteCall() async {
+  Future<bool> muteCall() async {
     return await _methodChannel.invokeMethod("muteCall");
   }
 
@@ -186,7 +195,7 @@ class SipNative {
     // _streamController.close();
   }
 
-  static String getProtocol(SipProtocol sipProtocol) {
+  String getProtocol(SipProtocol sipProtocol) {
     String protocol;
     switch (sipProtocol) {
       case SipProtocol.UDP:

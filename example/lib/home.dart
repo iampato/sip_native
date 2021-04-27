@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
     String password,
     String domain,
   ) async {
-    bool response = await SipNative.initSipConnection(
+    bool response = await _sipNative.initSipConnection(
       username: username,
       password: password,
       domain: domain,
@@ -89,13 +89,13 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   child: Text("1. Get permissions"),
                   onPressed: () async {
-                    await SipNative.requestPermissions();
+                    await _sipNative.requestPermissions();
                   },
                 ),
-                 ElevatedButton(
+                ElevatedButton(
                   child: Text("1.1. Init Plugin"),
                   onPressed: () async {
-                    await SipNative.initPlugin();
+                    await _sipNative.initPlugin();
                   },
                 ),
                 ElevatedButton(
@@ -124,13 +124,13 @@ class _HomePageState extends State<HomePage> {
                 ElevatedButton(
                   child: Text("3. SIP disconnect"),
                   onPressed: () async {
-                    await SipNative().disconnectSip();
+                    await _sipNative.disconnectSip();
                   },
                 ),
                 ElevatedButton(
                   child: Text("Init call"),
                   onPressed: () async {
-                    bool res = await SipNative.initCall("254716843447");
+                    bool res = await _sipNative.initCall("254716843447");
                     // if (res) {
                     //   initCallsStream();
                     // }
